@@ -1,1 +1,68 @@
-<p>countries-home works!</p>
+<main
+  class="h-screen bg-light dark:bg-very-dark-blue-dark flex flex-col justify-start items-center"
+>
+  <header
+    class="w-full flex justify-around md:justify-between gap-8 py-8 bg-white dark:bg-dark-blue mb-6 md:px-12 Llaptop:px-24"
+  >
+    <h1 class="font-bold text-base dark:text-white">Where in the world?</h1>
+    <button (click)="toggleDark()" class="font-light text-sm dark:text-white">
+      <i class="fa-solid fa-moon pr-2"></i>Dark Mode
+    </button>
+  </header>
+  <section class="w-full bg-light dark:bg-very-dark-blue-dark relative">
+    <form class="relative w-90vw mx-auto rounded-md">
+      <label for="countrySearch" class="sr-only">Search for a country</label>
+      <div>
+        <i
+          class="fa-solid fa-magnifying-glass absolute top-2 left-2 text-very-light-gray text-sm"
+        ></i>
+        <input
+          type="text"
+          id="countrySearch"
+          name="countrySearch"
+          placeholder="Search for a country..."
+          class="py-3 w-full mx-auto pl-8 rounded-md dark:bg-dark-blue focus:outline-0 md:w-96 placeholder-gray-500 dark:placeholder-gray-300 text-sm"
+        />
+      </div>
+    </form>
+    <div
+      class="w-max pl-4 md:absolute md:-top-3 md:right-14 Llaptop:right-24 2xl:right-36"
+    >
+      <div
+        class="flex justify-between items-center w-40 gap-4 py-3 px-3 text-xs mt-4 bg-white dark:bg-dark-blue dark:text-white rounded-md shadow-sm"
+      >
+        <p class="text-gray-500 dark:text-gray-300">Filter by Region</p>
+        <i class="fas fa-angle-down text-xs"></i>
+      </div>
+      <ul
+        class="bg-white w-40 px-4 py-2 dark:bg-dark-blue dark:text-white rounded-md mt-1 flex-col gap-1 absolute hidden"
+      >
+        <li class="text-xs">Africa</li>
+        <li class="text-xs">Americas</li>
+        <li class="text-xs">Asia</li>
+        <li class="text-xs">Europe</li>
+        <li class="text-xs">Oceania</li>
+      </ul>
+    </div>
+    <section
+      class="mt-10 w-90vw mx-auto flex flex-col items-center gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 Llaptop:grid-cols-4 2xl:grid-cols-5"
+    >
+      @for (country of countries; track $index) {
+      <div class="h-80 w-90vw md:w-80 lg:w-72 grid grid-rows-2">
+        <img
+          [src]="country.flags.png"
+          alt="Flag of {{ country.name }}"
+          class="row-span-1 h-full w-full hover:scale-105 hover:cursor-pointer"
+          (click)="navigateToSingleCountry(country.name)"
+        />
+        <div class="pl-8 dark:text-white dark:bg-dark-blue py-5 row-span-2">
+          <h2 class="font-bold mb-2 text-lg">{{ country.name }}</h2>
+          <p class="text-sm">Population: {{ country.population }}</p>
+          <p class="text-sm">Region: {{ country.region }}</p>
+          <p class="text-sm">Capital: {{ country.population }}</p>
+        </div>
+      </div>
+      }
+    </section>
+  </section>
+</main>
