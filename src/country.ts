@@ -1,6 +1,7 @@
 export interface Country {
   name: string;
   topLevelDomain: string[];
+  nativeName: string;
   capital: string;
   subregion: string;
   region: string;

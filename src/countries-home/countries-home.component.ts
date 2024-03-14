@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Country } from '../country';
 import { CountriesService } from '../service/countries.service';
 import { Router } from '@angular/router';
-import { CountrySingleComponent } from './country-single/country-single.component';
 
 @Component({
   selector: 'app-countries-home',

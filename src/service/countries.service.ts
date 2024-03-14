@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Country } from '../country';
-
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,6 +13,24 @@ export class CountriesService {
 
   getAllCountries(): Observable<Country[]> {
     return this.http.get<Country[]>('assets/data.json').pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching data:', error);
+        return throwError(
+          () => new Error('An error occurred while fetching data')
+        );
+      })
+    );
+  }
+
+  getSingleCountry(name: string): Observable<Country> {
+    return this.getAllCountries().pipe(
+      map((countries) => {
+        const country = countries.find((country) => country.name === name);
+        if (!country) {
+          throw new Error(`No country found with name: ${name}`);
+        }
+        return country;
+      }),
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching data:', error);
         return throwError(

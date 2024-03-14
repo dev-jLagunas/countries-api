@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "src/app/app.component.html",
     "src/countries-home/countries-home.component.html",
+    "src/countries-home/country-single/country-single.component.html",
   ],
   darkMode: "class",
   theme: {
