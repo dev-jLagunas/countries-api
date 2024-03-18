@@ -1,27 +1,64 @@
-# CountriesApi
+# Frontend Mentor - REST Countries API with color theme switcher solution
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+This is an advanced Frontend Mentor project. The project is a "Countries API" app where users are able to see the world countries. They are also able to search for individual countries, filter countries based on region, and click on individual countries to see more information on that country. The project was made with Angular CLI 17, Tailwind, and Typescript.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- View list of all countries
+- Search for a country
+- Filter countries by region
+- View more details about a country
 
-## Code scaffolding
+### Screenshot
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Project Screenshot](src/assets/countries-screenshot.png)
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-## Running unit tests
+### Prerequisites
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Before you begin, ensure you have met the following requirements:
 
-## Running end-to-end tests
+- You have installed the latest version of [Node.js and npm](https://nodejs.org/en/download/)
+- You have a Windows/Linux/Mac machine.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Installing
 
-## Further help
+1. Clone this repository to your local machine or download the files as a zip.
+2. Navigate to the project directory.
+3. Run `npm install` to install the project dependencies.
+4. Run `ng serve` to start the Angular development server. By default, this will start the server on `http://localhost:4200/`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Built With
+
+- [Angular](https://angular.io/) - The web framework used
+- [NPM](https://www.npmjs.com/) - Dependency Management
+- [Angular CLI](https://cli.angular.io/) - Used to generate boilerplate code
+
+## Contributing
+
+This project is a simple practice project and is not currently accepting contributions.
+
+## License
+
+This project is licensed under the MIT License - see the `LICENSE.md` file for details.
+
+## Contact
+
+For any questions or concerns, please contact Juan Lagunas at dev.jlagunas@gmail.com.
+
+## Authors
+
+- **Juan Lagunas** - [dev-jLagunas](https://github.com/dev-jlagunas)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+-Thank you to Frontend Mentor for providing these challenges to us.
