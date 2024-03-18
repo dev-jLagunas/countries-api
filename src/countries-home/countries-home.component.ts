@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 })
 export class CountriesHomeComponent implements OnInit {
   countries: Country[] = [];
+  filteredCountries: Country[] = [];
+  searchTerm: string = '';
+  showRegions: boolean = false;
 
   constructor(
     private countriesService: CountriesService,
@@ -23,6 +26,7 @@ export class CountriesHomeComponent implements OnInit {
     this.countriesService.getAllCountries().subscribe(
       (data: Country[]) => {
         this.countries = data;
+        this.filteredCountries = data;
       },
       (error) => {
         console.log('Error', error);
@@ -36,5 +40,30 @@ export class CountriesHomeComponent implements OnInit {
 
   navigateToSingleCountry(name: string) {
     this.router.navigate(['countries/single', name]);
+  }
+
+  searchCountry() {
+    if (!this.searchTerm) {
+      this.filteredCountries = this.countries;
+    } else {
+      this.filteredCountries = this.countries.filter((country) => {
+        console.log(this.searchTerm);
+        return country.name
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase());
+      });
+    }
+  }
+
+  filterCountriesByRegion(region: string) {
+    this.countriesService.filterThroughRegion(region).subscribe(
+      (countries: Country[]) => {
+        this.filteredCountries = countries;
+        this.showRegions = !this.showRegions;
+      },
+      (error) => {
+        console.log('Error', error);
+      }
+    );
   }
 }

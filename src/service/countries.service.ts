@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Country } from '../country';
 import { map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -37,6 +38,14 @@ export class CountriesService {
           () => new Error('An error occurred while fetching data')
         );
       })
+    );
+  }
+
+  filterThroughRegion(region: string): Observable<Country[]> {
+    return this.getAllCountries().pipe(
+      map((countries) =>
+        countries.filter((country) => country.region === region)
+      )
     );
   }
 }
