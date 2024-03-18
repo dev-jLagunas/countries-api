@@ -3,16 +3,19 @@ import { CountriesService } from '../../service/countries.service';
 import { ActivatedRoute } from '@angular/router';
 import { Country } from '../../country';
 import { RouterLink } from '@angular/router';
+import { Observable, switchMap, combineLatest, from } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-country-single',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, AsyncPipe],
   templateUrl: './country-single.component.html',
   styleUrl: './country-single.component.scss',
 })
 export class CountrySingleComponent implements OnInit {
   country!: Country;
+  borderCountryNames$!: Observable<string[]>;
 
   constructor(
     private countriesService: CountriesService,
@@ -24,9 +27,16 @@ export class CountrySingleComponent implements OnInit {
     if (name) {
       this.countriesService.getSingleCountry(name).subscribe((country) => {
         this.country = country;
-        console.log(this.country.borders);
+        this.borderCountryNames$ = from([this.country.borders]).pipe(
+          switchMap((borders: string[]) =>
+            combineLatest(
+              borders.map((border) =>
+                this.countriesService.getCountryNameByCode(border)
+              )
+            )
+          )
+        );
       });
-    } else {
     }
   }
 

@@ -73,9 +73,9 @@
       <div class="lg:col-span-2 lg:mt-8">
         <p class="font-bold">Border Countries:</p>
         <ul class="flex justify-evenly flex-wrap gap-1">
-          @for (border of country.borders; track $index) {
+          @for (name of borderCountryNames$ | async; track $index) {
           <li class="py-1 px-4 shadow-md text-xs">
-            {{ border }}
+            {{ name }}
           </li>
           }
         </ul>

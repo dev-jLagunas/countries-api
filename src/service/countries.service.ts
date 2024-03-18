@@ -58,4 +58,15 @@ export class CountriesService {
       )
     );
   }
+
+  getCountryNameByCode(code: string): Observable<string> {
+    return this.getAllCountries().pipe(
+      map((countries: Country[]) => {
+        const country = countries.find(
+          (country) => country.alpha3Code === code
+        );
+        return country ? country.name : '';
+      })
+    );
+  }
 }
