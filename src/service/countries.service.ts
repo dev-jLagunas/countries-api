@@ -48,4 +48,14 @@ export class CountriesService {
       )
     );
   }
+
+  searchBasedOnName(term: string): Observable<Country[]> {
+    return this.getAllCountries().pipe(
+      map((countries: Country[]) =>
+        countries.filter((country) =>
+          country.name.toLowerCase().includes(term.toLowerCase())
+        )
+      )
+    );
+  }
 }

@@ -21,7 +21,7 @@
           id="countrySearch"
           name="countrySearch"
           placeholder="Search for a country..."
-          class="py-3 w-full mx-auto pl-8 rounded-md dark:bg-dark-blue focus:outline-0 md:w-96 placeholder-gray-500 dark:placeholder-gray-300 text-sm"
+          class="py-3 w-full mx-auto pl-8 rounded-md dark:bg-dark-blue focus:outline-0 md:w-96 placeholder-gray-500 dark:placeholder-gray-300 text-sm dark:text-white"
           [(ngModel)]="searchTerm"
           (keyup.enter)="searchCountry()"
         />
@@ -77,7 +77,7 @@
     <section
       class="mt-10 w-90vw mx-auto flex flex-col items-center gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 Llaptop:grid-cols-4 2xl:grid-cols-5"
     >
-      @for (country of filteredCountries; track $index) {
+      @for (country of filteredCountries$ | async; track $index) {
       <div class="h-80 w-90vw md:w-80 lg:w-72 grid grid-rows-2">
         <img
           [src]="country.flags.png"

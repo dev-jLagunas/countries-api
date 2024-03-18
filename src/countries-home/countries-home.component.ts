@@ -3,17 +3,20 @@ import { FormsModule } from '@angular/forms';
 import { Country } from '../country';
 import { CountriesService } from '../service/countries.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-countries-home',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, AsyncPipe],
   templateUrl: './countries-home.component.html',
   styleUrl: './countries-home.component.scss',
 })
 export class CountriesHomeComponent implements OnInit {
-  countries: Country[] = [];
-  filteredCountries: Country[] = [];
+  countries$: Observable<Country[]> | undefined;
+  filteredCountries$: Observable<Country[]> | undefined;
   searchTerm: string = '';
   showRegions: boolean = false;
 
@@ -23,15 +26,7 @@ export class CountriesHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.countriesService.getAllCountries().subscribe(
-      (data: Country[]) => {
-        this.countries = data;
-        this.filteredCountries = data;
-      },
-      (error) => {
-        console.log('Error', error);
-      }
-    );
+    this.filteredCountries$ = this.countriesService.getAllCountries();
   }
 
   toggleDark() {
@@ -44,26 +39,16 @@ export class CountriesHomeComponent implements OnInit {
 
   searchCountry() {
     if (!this.searchTerm) {
-      this.filteredCountries = this.countries;
+      this.filteredCountries$ = this.countries$;
     } else {
-      this.filteredCountries = this.countries.filter((country) => {
-        console.log(this.searchTerm);
-        return country.name
-          .toLowerCase()
-          .includes(this.searchTerm.toLowerCase());
-      });
+      this.filteredCountries$ = this.countriesService.searchBasedOnName(
+        this.searchTerm
+      );
     }
   }
 
   filterCountriesByRegion(region: string) {
-    this.countriesService.filterThroughRegion(region).subscribe(
-      (countries: Country[]) => {
-        this.filteredCountries = countries;
-        this.showRegions = !this.showRegions;
-      },
-      (error) => {
-        console.log('Error', error);
-      }
-    );
+    this.filteredCountries$ = this.countriesService.filterThroughRegion(region);
+    this.showRegions = !this.showRegions;
   }
 }
